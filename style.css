@@ -1,6 +1,12 @@
-
+section {
+    padding-top: 4rem ;
+}
 
 .jumbotron  {
-    padding: 7rem ;
-    background-color: #9bc6ff;
+    padding-top: 5rem ;
+    background-color: #acd0ff;
+}
+
+.kegiatan {
+    background-color: #acd0ff;
 }
