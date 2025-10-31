@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body id="home">
+  <body>
     <!-- Pengumuman -->
 
     <!-- end Pengumuman -->
@@ -25,9 +25,9 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto" id="navbar">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#home">Home</a>
+              <a class="nav-link active" href="#Home">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#about">About</a>
@@ -43,9 +43,10 @@
       </div>
     </nav>
     <!--end Navbar-->
+    <div class="topp"></div>
 
     <!--hero section-->
-    <section class="jumbotron text-center">
+    <section id="Home" class="jumbotron text-center">
       <img src="img/profile.jpg" alt="1" width="200" class="rounded-circle" />
       <h3 class="display-4">Marcellus Arga Selan</h3>
       <p class="lead">Gamer | Web Programer</p>
@@ -167,7 +168,7 @@
     </footer>
     <!-- end footer -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="js/main.js"></script> -->
     <script>
       const scriptURL = "https://script.google.com/macros/s/AKfycby6SILggZhFm3gIaExhY0WOLnaWQ2kkmGBirft0X9hSFB1dEi6fJQFTY6qcPsWSuDiA/exec";
@@ -178,6 +179,37 @@
         fetch(scriptURL, { method: "POST", body: new FormData(form) })
           .then((response) => console.log("Success!", response))
           .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+    <script>
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("#navbar .nav-link");
+
+      // Saat di-scroll
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 80; // tinggi offset dari navbar
+          const sectionHeight = section.clientHeight;
+          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      // Saat link diklik
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+        });
       });
     </script>
   </body>
